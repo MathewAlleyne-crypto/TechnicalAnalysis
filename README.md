@@ -14,14 +14,22 @@ TechnicalAnalysis/
 │   ├── technical_analysis_functions.R
 │   ├── technical_analysis_display.Rmd
 │   └── MathewAlleyne_BDA400_A02.docx
-└── Assignment5/
-    ├── sma.R, ema.R, macd.R, stdev.R, linreg.R
-    ├── rsi.R, stoch_rsi.R, crossover.R, crossunder.R
-    ├── run_all.R, test_indicators.R
+├── Assignment5/
+│   ├── sma.R, ema.R, macd.R, stdev.R, linreg.R
+│   ├── rsi.R, stoch_rsi.R, crossover.R, crossunder.R
+│   ├── run_all.R, test_indicators.R
+│   ├── portfolio.txt, stock_data_2025.csv
+│   ├── run_all_output.txt, test_output.txt
+│   ├── README.md
+│   └── MathewAlleyne_BDA400_A05.docx
+└── Assignment6/
+    ├── app.R                  (Shiny portfolio dashboard)
+    ├── indicators/            (Assignment 5 indicator functions)
+    ├── make_screenshots.R, make_screenshots_output.txt
     ├── portfolio.txt, stock_data_2025.csv
-    ├── run_all_output.txt, test_output.txt
-    ├── README.md
-    └── MathewAlleyne_BDA400_A05.docx
+    ├── screenshots/
+    ├── README.md              (cover page)
+    └── MathewAlleyne_BDA400_A06.docx
 ```
 
 Each assignment is stored in its own subdirectory.
