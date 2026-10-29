@@ -1,0 +1,13 @@
+AAPL   Candlestick Daily   rule=ma       bars=250  Buy= 3 Sell= 3  strategy= +13.9%  buy&hold= +11.5%  [Yahoo Finance]
+MSFT   Line        Weekly  rule=combined bars= 53  Buy= 2 Sell= 3  strategy=  +8.9%  buy&hold= +14.2%  [Yahoo Finance]
+TSLA   Area        Daily   rule=rsi      bars=250  Buy= 1 Sell= 1  strategy= +16.8%  buy&hold= +18.6%  [Yahoo Finance]
+GOOGL  Candlestick Daily   rule=macd     bars= 85  Buy= 2 Sell= 3  strategy= +12.2%  buy&hold= +48.1%  [Yahoo Finance]
+AAPL MA rule check - Buy bars match SMA20 crossing above SMA50: TRUE 
+AAPL MA rule check - Sell bars match SMA20 crossing below SMA50: TRUE 
+       Date Signal  Close SMA_short SMA_long
+ 2025-01-27   Sell 229.86  237.8880 239.2552
+ 2025-03-06    Buy 235.33  239.1755 239.0744
+ 2025-03-17   Sell 214.00  234.0465 234.2014
+ 2025-06-06    Buy 203.92  204.2710 203.6794
+ 2025-06-16   Sell 198.42  201.2550 201.3358
+ 2025-07-11    Buy 211.16  204.3190 203.9402
