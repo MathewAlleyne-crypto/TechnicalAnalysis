@@ -1,0 +1,110 @@
+Loaded: sma.R, ema.R, macd.R, stdev.R, linreg.R, rsi.R, stoch_rsi.R, crossover.R, crossunder.R 
+
+================ EXAMPLES FROM THE BRIEF ================
+
+--- sma(data, period = 3) ---
+[1] 12.3333 15.6667 17.6667 20.0000 21.6667 23.6667 23.3333
+
+--- ema(data, period = 3) ---
+[1] 10.0000 11.0000 13.0000 16.5000 17.2500 19.6250 22.3125 23.1562 22.0781
+
+--- macd(c(100,...,130), 3, 5, 2) ---
+$macd_line
+[1] 0.0000 0.8333 1.8056 2.6620 3.3372 3.8394 4.2002
+
+$signal_line
+[1] 0.0000 0.5556 1.3889 2.2377 2.9707 3.5498 3.9834
+
+$histogram
+[1] 0.0000 0.2778 0.4167 0.4244 0.3665 0.2896 0.2168
+
+
+--- stdev(data) ---
+[1] 4.9466
+
+--- linreg(data, regressionLength = 5, regressionOffset = 0) ---
+$slope
+[1] 0.7429
+
+$intercept
+[1] 19.0667
+
+$predicted_values
+[1] 19.8095 20.5524 21.2952 22.0381 22.7810 23.5238
+
+
+--- rsi(rsi_data, period = 5) ---
+ [1]      NA      NA      NA      NA      NA 50.5263 68.9256 71.8352 78.2108
+[10] 66.8597
+
+--- stoch_rsi(rsi_data, period = 14, k_period = 3, d_period = 3)  [brief's example: 10 points < 14] ---
+$k_line
+[1] NA
+
+$d_line
+[1] NA
+
+
+--- stoch_rsi(rsi_data, period = 3, k_period = 3, d_period = 3) ---
+$k_line
+[1] 0.4901 0.3696 0.4543 0.7547 0.6511
+
+$d_line
+[1] 0.4380 0.5262 0.6200
+
+
+--- crossover(arr1, arr2) ---
+[1] "None" "None" "None" "Up"   "None" "None" "None" "None" "None"
+
+--- crossunder(arr1, arr2) ---
+[1] "None"  "False" "False" "False" "False" "False" "False" "False" "False"
+
+--- crossunder(arr2, arr1) ---
+[1] "None"  "False" "False" "True"  "False" "False" "False" "False" "False"
+
+================ STOCK DATA FRAMES ================
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+Downloaded from Yahoo Finance and saved to stock_data_2025.csv 
+AAPL : 249 rows, 2025-01-02 to 2025-12-30 
+MSFT : 249 rows, 2025-01-02 to 2025-12-30 
+GOOGL : 249 rows, 2025-01-02 to 2025-12-30 
+AMZN : 249 rows, 2025-01-02 to 2025-12-30 
+TSLA : 249 rows, 2025-01-02 to 2025-12-30 
+
+--- AAPL - last 5 rows with indicators ---
+          Date  Close    SMA20    EMA12       MACD    RSI14    Slope20
+245 2025-12-23 272.36 277.3100 274.3192 0.34870281 46.97333 -0.4425325
+246 2025-12-24 273.81 277.1520 274.2409 0.28224985 49.96227 -0.5060390
+247 2025-12-26 273.40 276.9445 274.1115 0.19426249 49.11918 -0.5571299
+248 2025-12-29 273.76 276.6900 274.0574 0.15183065 49.91830 -0.5906234
+249 2025-12-30 273.08 276.1890 273.9071 0.06261105 48.37286 -0.6094545
+
+================ FILTERS ================
+AAPL rows in Q2 2025: 62 
+AAPL weekly bars: 53  (weekly RSI-14 last value: 64.37 )
+
+--- Screen on latest bar: Close > SMA20, Slope20 > 0, RSI14 < 70 ---
+      Symbol  Close    SMA20     Slope20    RSI14 Passes
+AAPL    AAPL 273.08 276.1890 -0.60945455 48.37286  FALSE
+MSFT    MSFT 487.48 483.7320  0.10137662 49.95537   TRUE
+GOOGL  GOOGL 313.85 312.3665 -0.38001299 57.93615  FALSE
+AMZN    AMZN 232.53 228.9525 -0.03411688 55.21534  FALSE
+TSLA    TSLA 454.43 463.6765  2.20888312 48.54152  FALSE
+
+================ TRADING RULES ================
+AAPL: 11 BUY, 30 SELL signals
+MSFT: 6 BUY, 61 SELL signals
+GOOGL: 9 BUY, 62 SELL signals
+AMZN: 14 BUY, 17 SELL signals
+TSLA: 10 BUY, 28 SELL signals
+
+--- AAPL - first 6 BUY signals ---
+          Date  Close      MACD MACD_signal    RSI14
+18  2025-01-29 239.36 -2.952183   -3.623451 48.50665
+56  2025-03-25 223.75 -5.136438   -5.223584 46.84487
+71  2025-04-15 202.14 -8.206156   -8.302648 45.42608
+89  2025-05-12 210.79 -1.760817   -2.348194 54.90375
+107 2025-06-06 203.92 -1.088999   -1.236020 50.39748
+117 2025-06-23 201.50 -1.420761   -1.567823 50.38515

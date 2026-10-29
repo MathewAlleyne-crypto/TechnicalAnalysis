@@ -1,0 +1,64 @@
+
+SMA
+  [PASS] brief example (hand calc): 12.333 15.667 17.667 20 21.667 23.667 23.333
+  [PASS] length = n - period + 1
+  [PASS] matches stats::filter() moving average
+  [PASS] period = length gives the overall mean
+  [PASS] error when data shorter than period
+
+EMA
+  [PASS] brief example (hand calc first 3): 10, 11, 13
+  [PASS] matches Reduce() recursion on 300 prices
+  [PASS] same length as input
+  [PASS] constant series stays constant
+
+MACD
+  [PASS] macd_line = ema(3) - ema(5)
+  [PASS] hand calc: macd_line[2] = 102.5 - 101.6667 = 0.8333
+  [PASS] histogram = macd_line - signal_line
+  [PASS] returns list(macd_line, signal_line, histogram)
+  [PASS] rising prices -> positive MACD after the start
+  [PASS] error when short_period >= long_period
+
+STDEV (population)
+  [PASS] brief example: sqrt(1982/81) = 4.946629 (Sheets: STDEVP)
+  [PASS] equals sd() * sqrt((n-1)/n)
+  [PASS] constant data -> 0
+  [PASS] error on empty input
+
+LINREG
+  [PASS] window follows pseudocode (offset 0 -> 6 points: 20 18 22 25 24 21)
+  [PASS] slope matches lm()
+  [PASS] intercept matches lm()
+  [PASS] predicted values match lm() fitted values
+  [PASS] perfect line y = 2x + 1 recovered
+  [PASS] offset shifts window back (offset 2 -> ends at n - 2)
+  [PASS] error when regressionLength > n
+  [PASS] error when regressionOffset >= regressionLength
+
+RSI
+  [PASS] first 5 values are NA
+  [PASS] hand calc RSI[6] = 50.5263
+  [PASS] matches independent RSI = 100*avgGain/(avgGain+avgLoss) on 300 prices
+  [PASS] values within 0-100
+  [PASS] only rising prices -> RSI = 100
+  [PASS] too little data -> all NA with a warning
+
+STOCH RSI
+  [PASS] k_line = SMA3 of normalised RSI
+  [PASS] d_line = SMA3 of k_line
+  [PASS] values between 0 and 1
+  [PASS] lengths: k = 286 - 2 = 284, d = 282
+  [PASS] brief example (10 points, period 14) returns NA without crashing
+
+CROSSOVER / CROSSUNDER
+  [PASS] crossover brief example: Up at point 4 only
+  [PASS] crossover detects Down
+  [PASS] crossunder brief example: no crossunder
+  [PASS] crossunder(arr2, arr1): True at point 4 only
+  [PASS] touching then crossing counts once
+  [PASS] NA values give no signal
+  [PASS] error on different lengths
+  [PASS] agrees with vectorised check on EMA12/EMA26 of 300 prices
+
+RESULT: 46 passed, 0 failed
