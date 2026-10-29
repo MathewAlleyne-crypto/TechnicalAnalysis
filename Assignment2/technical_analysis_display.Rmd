@@ -1,0 +1,87 @@
+---
+title: "Technical Analysis using R: Preliminary Stage"
+author: "Mathew Alleyne (Student ID: 664429889)"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Purpose
+
+This document imports stock data for the symbols listed in `portfolio.txt`,
+computes basic statistics (moving average, mean, mode, median and standard
+deviation), and displays the data and visualizations. Functions are defined
+in `technical_analysis_functions.R`.
+
+# 1. Install packages (run once)
+
+```{r install, eval=FALSE}
+install.packages(c("quantmod", "TTR", "rmarkdown", "knitr"))
+```
+
+# 2. Load functions and portfolio
+
+```{r load-functions}
+source("technical_analysis_functions.R")
+
+symbols <- read_symbols("portfolio.txt")
+symbols
+```
+
+# 3. Import stock data
+
+Data is downloaded from Yahoo Finance with `quantmod` for 2025 and stored as
+one data frame per symbol.
+
+```{r import}
+stocks <- load_stock_data("portfolio.txt",
+                          from = "2025-01-01", to = "2025-12-31")
+names(stocks)
+```
+
+# 4. Display imported data
+
+```{r display-data}
+display_stock_data(stocks, n = 5)
+```
+
+# 5. Basic statistics
+
+```{r statistics}
+stats <- calculate_all_statistics(stocks, ma_window = 20)
+knitr::kable(stats$summary, row.names = FALSE,
+             caption = "Basic statistics of closing prices (2025)")
+```
+
+# 6. Visualizations
+
+## Closing price with 20-day moving average
+
+```{r price-plots, fig.width=8, fig.height=4}
+for (sym in names(stocks)) {
+  plot_price_with_ma(stocks[[sym]], sym, ma_window = 20)
+}
+```
+
+## Trading volume
+
+```{r volume-plots, fig.width=8, fig.height=4}
+for (sym in names(stocks)) {
+  plot_volume(stocks[[sym]], sym)
+}
+```
+
+## Statistics comparison
+
+```{r stats-plot, fig.width=7, fig.height=4}
+plot_statistics_summary(stats$summary)
+```
+
+# Session information
+
+```{r session-info}
+sessionInfo()
+```
